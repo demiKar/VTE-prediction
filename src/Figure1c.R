@@ -21,7 +21,7 @@ createROCObject <- function(dfSet){
 
 ##### Initialization
 
-biological_data <- read_xlsx("/data/biological_data_Figure1C.xlsx")
+biological_data <- read_xlsx("/data/Figure1C.xlsx")
 biological_data <- as.data.table(biological_data)
 
 model <- readRDS("/data/Model.rds")

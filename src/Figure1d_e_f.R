@@ -9,9 +9,9 @@ library("ggsurvfit")
 
 ##### Initialization
 
-cumulative_lung <- readRDS("/data/Culumative_Lung_Figure1D.RDS")
-cumulative_gastric <- readRDS("/data/Culumative_Gastric_Figure1E.RDS")
-cumulative_avert <- readRDS("/data/Culumative_Avert_Figure1F.RDS")
+cumulative_lung <- readRDS("/data/Figure1D.RDS")
+cumulative_gastric <- readRDS("/data/Figure1E.RDS")
+cumulative_avert <- readRDS("/data/Figure1F.RDS")
 
 
 ##### Plot cumulative 
