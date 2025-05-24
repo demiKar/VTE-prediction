@@ -1,0 +1,12 @@
+#Custom code created to run MR analyses
+#Daniel Hui
+#May 6, 2025
+
+.
+├── convert_log10p.R #convert -log10p to p
+├── flip_alleles_positive.py #flip exposure betas to positive (and flip alleles if necessary)
+├── lift_vte_hg38.py #lift VTE gwas to hg38
+├── filter_by_chrom_genpos.py #only keep chrom/positions in both CD200R1 and VTE GWAS
+├── top_loci_on_clumps.py #only keep lead variants such that all are at least 1 Mb away from each other
+├── match_alleles_general_onlySomeColumns.py #match the final CD200R1 instruments to VTE GWAS
+└── MR_code_and_plot.R #run MR and make forest plot
