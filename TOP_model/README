@@ -1,0 +1,141 @@
+# TOP Model Prediction
+
+## Overview
+
+This script applies the pretrained TOP (Thrombosis Oncology Prediction) model to new patient data.
+
+The script:
+
+1. Loads the pretrained TOP model (`TOP.rds`)
+2. Loads the preprocessing normalization object (`normalization.rds`)
+3. Applies the same preprocessing used during training
+4. Predicts TOP probabilities for each patient
+5. Classifies patients into:
+   - High risk
+   - Low risk
+
+using the fixed Youden index threshold derived during model training.
+
+---
+
+# Files Required
+
+The following files are required:
+
+- `TOP_predict.R`
+- `TOP.rds`
+- `normalization.rds`
+- Input data file (`.xlsx`)
+
+---
+
+# Usage
+
+Run the script from the command line:
+
+```bash
+Rscript TOP_predict.R \
+  --input INPUT.xlsx \
+  --model TOP.rds \
+  --normalization normalization.rds \
+  --output TOP_predictions.csv
+```
+
+---
+
+# Input File Format
+
+The input file must be an Excel (`.xlsx`) file.
+
+The following columns are required:
+
+| Column Name |
+|---|
+| PatientID |
+| gal-8 |
+| LAT |
+| DAB2 |
+| CD200R1 |
+| CNDP1 |
+| CD84 |
+| SPON2 |
+| CDH6 |
+| FR-gamma |
+| SERPINB8 |
+| MARCO |
+| BMI |
+| HGB |
+| Age |
+| Sex |
+| History.of.venous.thrombosis |
+
+Column names must match exactly.
+
+---
+
+# Output
+
+The script generates a CSV file containing:
+
+| Column | Description |
+|---|---|
+| PatientID | Patient identifier |
+| TOP_probability | Predicted TOP probability |
+| Youden_threshold | Fixed threshold used for classification |
+| TOP_risk_group | High or Low risk classification |
+
+---
+
+# Risk Classification
+
+Patients are classified using the fixed Youden index threshold derived during training:
+
+- High risk: probability ≥ 0.09547292
+- Low risk: probability < 0.09547292
+
+---
+
+# Dependencies
+
+The following R packages are required:
+
+- optparse
+- caret
+- data.table
+- dplyr
+- openxlsx
+
+Install missing packages with:
+
+```r
+install.packages(c(
+  "optparse",
+  "caret",
+  "data.table",
+  "dplyr",
+  "openxlsx"
+))
+```
+
+---
+
+# Example
+
+```bash
+Rscript TOP_predict.R \
+  --input AVERT.xlsx \
+  --model TOP.rds \
+  --normalization normalization.rds \
+  --output AVERT_TOP_predictions.csv
+```
+
+---
+
+# Notes
+
+- The model expects the same feature format used during training.
+- Missing required columns will generate an error.
+- The preprocessing normalization is automatically applied before prediction.
+- The Youden threshold is fixed and corresponds to the threshold derived during training of the TOP model.
+
+```
